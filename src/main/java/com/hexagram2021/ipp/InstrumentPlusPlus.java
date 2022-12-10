@@ -1,5 +1,6 @@
 package com.hexagram2021.ipp;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.hexagram2021.ipp.common.IPPContent;
 import com.hexagram2021.ipp.common.crafting.MusicalInstrumentShadowRecipe;
@@ -24,7 +25,6 @@ import net.minecraftforge.fml.ModLoadingStage;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.commons.compress.utils.Lists;
 import org.slf4j.Logger;
 
 import java.util.List;
