@@ -1,81 +1,91 @@
-package com.example.examplemod;
+package com.hexagram2021.ipp;
 
+import com.google.common.collect.Maps;
+import com.hexagram2021.ipp.common.IPPContent;
+import com.hexagram2021.ipp.common.crafting.MusicalInstrumentShadowRecipe;
+import com.hexagram2021.ipp.common.register.IPPRecipes;
+import com.hexagram2021.ipp.mixin.RecipeManagerAccess;
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.ModLoadingStage;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.commons.compress.utils.Lists;
 import org.slf4j.Logger;
 
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Consumer;
 
-// The value here should match an entry in the META-INF/mods.toml file
-@Mod("examplemod")
-public class ExampleMod
-{
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+@Mod(InstrumentPlusPlus.MODID)
+public class InstrumentPlusPlus {
+    public static final String MODID = "ipp";
 
-    public ExampleMod()
-    {
-        // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+    public static final Logger LOGGER = LogUtils.getLogger();
 
-        // Register ourselves for server and other game events we are interested in
+    public InstrumentPlusPlus() {
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
+        DeferredWorkQueue queue = DeferredWorkQueue.lookup(Optional.of(ModLoadingStage.CONSTRUCT)).orElseThrow();
+        Consumer<Runnable> runLater = job -> queue.enqueueWork(
+                ModLoadingContext.get().getActiveContainer(), job
+        );
+        IPPContent.modConstruction(modBus, runLater);
+
+        modBus.addListener(this::setup);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+    private void setup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(IPPContent::init);
     }
 
-    private void enqueueIMC(final InterModEnqueueEvent event)
-    {
-        // Some example code to dispatch IMC to another mod
-        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
-    }
+    @SuppressWarnings("deprecation")
+    public void serverStarted(ServerStartedEvent event) {
+        ServerLevel world = event.getServer().getLevel(Level.OVERWORLD);
+        assert world != null;
+        RecipeManagerAccess recipeManagerAccess = (RecipeManagerAccess)(world.getRecipeManager());
+        Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipes = Maps.newHashMap(recipeManagerAccess.ipp_getRecipes());
+        recipes.compute(IPPRecipes.MUSICAL_INSTRUMENT_SHADOW_TYPE, (key, map) -> {
+            Map<ResourceLocation, Recipe<?>> shadows = Maps.newHashMap();
+            if(map != null) {
+                shadows.putAll(map);
+            }
 
-    private void processIMC(final InterModProcessEvent event)
-    {
-        // Some example code to receive and process InterModComms from other mods
-        LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(m->m.messageSupplier().get()).
-                collect(Collectors.toList()));
-    }
+            Map<NoteBlockInstrument, List<ItemStack>> bottoms = Maps.newHashMap();
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
-    }
+            Registry.BLOCK.forEach(block -> {
+                ItemStack itemStack = new ItemStack(block.asItem());
+                if(!itemStack.isEmpty()) {
+                    NoteBlockInstrument instrument = NoteBlockInstrument.byState(block.defaultBlockState());
+                    bottoms.computeIfAbsent(instrument, ignored -> Lists.newArrayList()).add(itemStack);
+                }
+            });
 
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents
-    {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent)
-        {
-            // Register a new block here
-            LOGGER.info("HELLO from Register Block");
-        }
+            bottoms.forEach((instrument, blocks) -> {
+                Ingredient bottom = Ingredient.of(blocks.stream());
+                ResourceLocation id = new ResourceLocation(MODID, "instrument/" + instrument.getSerializedName());
+                shadows.put(id, new MusicalInstrumentShadowRecipe(id, bottom, instrument));
+            });
+
+            return shadows;
+        });
+        recipeManagerAccess.ipp_setRecipes(recipes);
     }
 }

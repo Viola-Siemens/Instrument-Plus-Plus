@@ -130,7 +130,7 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.0'
 
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.5.174:api")	// Adds JEI API as a compile dependency
+    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.7.0.209:api")	// Adds JEI API as a compile dependency
 	
 	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
