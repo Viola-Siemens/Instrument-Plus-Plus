@@ -37,6 +37,23 @@
   "gui.ipp.jei.instrument.violin": "小提琴",
   "gui.ipp.jei.instrument.yangqin": "扬琴",
 
+  "jade.instrument.bassoon": "巴松管",
+  "jade.instrument.clarinet": "单簧管",
+  "jade.instrument.cymbal": "踩镲",
+  "jade.instrument.electric_clean": "清音电吉他",
+  "jade.instrument.electric_overdriven": "失真电吉他",
+  "jade.instrument.erhu": "二胡",
+  "jade.instrument.french_horn": "圆号",
+  "jade.instrument.guqin": "古琴",
+  "jade.instrument.konghou": "箜篌",
+  "jade.instrument.suona": "唢呐",
+  "jade.instrument.timpani": "定音鼓",
+  "jade.instrument.trumpet": "小号",
+  "jade.instrument.tuba": "大号",
+  "jade.instrument.viola": "中提琴",
+  "jade.instrument.violin": "小提琴",
+  "jade.instrument.yangqin": "扬琴",
+
   "gui.ipp.jei.instrument.tip": "音色：%s",
 
   "jei.ipp.musical_instrument": "音符盒的乐器"

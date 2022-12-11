@@ -37,6 +37,23 @@
   "gui.ipp.jei.instrument.violin": "Violin",
   "gui.ipp.jei.instrument.yangqin": "Yangqin",
 
+  "jade.instrument.bassoon": "Bassoon",
+  "jade.instrument.clarinet": "Clarinet",
+  "jade.instrument.cymbal": "Cymbal",
+  "jade.instrument.electric_clean": "Electric Guitar Clean",
+  "jade.instrument.electric_overdriven": "Electric Guitar Overdriven",
+  "jade.instrument.erhu": "Erhu",
+  "jade.instrument.french_horn": "French Horn",
+  "jade.instrument.guqin": "Guqin",
+  "jade.instrument.konghou": "Konghou",
+  "jade.instrument.suona": "Suona",
+  "jade.instrument.timpani": "Timpani",
+  "jade.instrument.trumpet": "Trumpet",
+  "jade.instrument.tuba": "Tuba",
+  "jade.instrument.viola": "Viola",
+  "jade.instrument.violin": "Violin",
+  "jade.instrument.yangqin": "Yangqin",
+
   "gui.ipp.jei.instrument.tip": "Timbre: %s",
 
   "jei.ipp.musical_instrument": "Musical Instrument of Note Block"
