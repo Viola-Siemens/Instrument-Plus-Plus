@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.hexagram2021.ipp.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "NoteBlockInstrumentMixin",
+    "RecipeManagerAccess",
+    "RecipeManagerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
