@@ -1,19 +1,17 @@
 package com.hexagram2021.ipp.common.register;
 
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.RegisterEvent;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.hexagram2021.ipp.InstrumentPlusPlus.MODID;
 
-@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class IPPSoundEvents {
-	static final Set<SoundEvent> registeredEvents = new HashSet<>();
+	static final Map<ResourceLocation, SoundEvent> registeredEvents = new HashMap<>();
 
 	public static final SoundEvent NOTE_BLOCK_BASSOON = registerSound("block.note_block.bassoon");
 	public static final SoundEvent NOTE_BLOCK_CLARINET = registerSound("block.note_block.clarinet");
@@ -35,13 +33,11 @@ public class IPPSoundEvents {
 	private static SoundEvent registerSound(String name) {
 		ResourceLocation location = new ResourceLocation(MODID, name);
 		SoundEvent event = new SoundEvent(location);
-		registeredEvents.add(event.setRegistryName(location));
+		registeredEvents.put(location, event);
 		return event;
 	}
 
-	@SubscribeEvent
-	public static void registerSounds(RegistryEvent.Register<SoundEvent> evt) {
-		for(SoundEvent event : registeredEvents)
-			evt.getRegistry().register(event);
+	public static void init(RegisterEvent event) {
+		event.register(Registry.SOUND_EVENT_REGISTRY, helper -> registeredEvents.forEach(helper::register));
 	}
 }

@@ -25,7 +25,6 @@ public class JeiHelper implements IModPlugin {
 	public static final RecipeType<MusicalInstrumentShadowRecipe> INSTRUMENTS = new RecipeType<>(MusicalInstrumentCategory.UID,  MusicalInstrumentShadowRecipe.class);
 
 	private static final ResourceLocation UID = new ResourceLocation(MODID, "main");
-	public static IDrawableStatic slotDrawable;
 
 	@Override
 	public ResourceLocation getPluginUid() {
@@ -45,8 +44,6 @@ public class JeiHelper implements IModPlugin {
 		registry.addRecipeCategories(
 				new MusicalInstrumentCategory(guiHelper)
 		);
-
-		slotDrawable = guiHelper.getSlotDrawable();
 	}
 
 	@Override

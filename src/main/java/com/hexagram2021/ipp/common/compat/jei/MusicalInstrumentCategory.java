@@ -14,7 +14,6 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -37,7 +36,7 @@ public class MusicalInstrumentCategory implements IRecipeCategory<MusicalInstrum
 
 	@Override
 	public Component getTitle() {
-		return new TranslatableComponent("jei.ipp.musical_instrument");
+		return Component.translatable("jei.ipp.musical_instrument");
 	}
 
 	@Override
@@ -50,18 +49,6 @@ public class MusicalInstrumentCategory implements IRecipeCategory<MusicalInstrum
 		return this.icon;
 	}
 
-	@SuppressWarnings("removal")
-	@Override
-	public ResourceLocation getUid() {
-		return UID;
-	}
-
-	@SuppressWarnings("removal")
-	@Override
-	public Class<? extends MusicalInstrumentShadowRecipe> getRecipeClass() {
-		return MusicalInstrumentShadowRecipe.class;
-	}
-
 	@Override
 	public RecipeType<MusicalInstrumentShadowRecipe> getRecipeType() {
 		return JeiHelper.INSTRUMENTS;
@@ -69,7 +56,7 @@ public class MusicalInstrumentCategory implements IRecipeCategory<MusicalInstrum
 
 	@Override
 	public void draw(MusicalInstrumentShadowRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-		Component tip = new TranslatableComponent("gui.ipp.jei.instrument.tip", new TranslatableComponent("gui.ipp.jei.instrument.%s".formatted(recipe.instrument().getSerializedName())));
+		Component tip = Component.translatable("gui.ipp.jei.instrument.tip", Component.translatable("gui.ipp.jei.instrument.%s".formatted(recipe.instrument().getSerializedName())));
 		Minecraft minecraft = Minecraft.getInstance();
 		Font fontRenderer = minecraft.font;
 		int stringWidth = fontRenderer.width(tip);

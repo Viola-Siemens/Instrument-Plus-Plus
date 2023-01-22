@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 
 public record MusicalInstrumentShadowRecipe(ResourceLocation id, Ingredient bottom, NoteBlockInstrument instrument) implements Recipe<Container> {
 	public static final CachedRecipeList<MusicalInstrumentShadowRecipe> recipeList = new CachedRecipeList<>(
-			() -> IPPRecipes.MUSICAL_INSTRUMENT_SHADOW_TYPE,
+			IPPRecipes.MUSICAL_INSTRUMENT_SHADOW_TYPE,
 			MusicalInstrumentShadowRecipe.class
 	);
 
@@ -38,11 +38,13 @@ public record MusicalInstrumentShadowRecipe(ResourceLocation id, Ingredient bott
 		return NonNullList.of(this.bottom);
 	}
 
+	@SuppressWarnings("NullableProblems")
 	@Override @Nullable
 	public ItemStack assemble(@NotNull Container container) {
 		return null;
 	}
 
+	@SuppressWarnings("NullableProblems")
 	@Override @Nullable
 	public ItemStack getResultItem() {
 		return null;
@@ -60,6 +62,6 @@ public record MusicalInstrumentShadowRecipe(ResourceLocation id, Ingredient bott
 
 	@Override @NotNull
 	public RecipeType<?> getType() {
-		return IPPRecipes.MUSICAL_INSTRUMENT_SHADOW_TYPE;
+		return IPPRecipes.MUSICAL_INSTRUMENT_SHADOW_TYPE.get();
 	}
 }

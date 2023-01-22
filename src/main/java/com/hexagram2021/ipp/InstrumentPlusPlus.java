@@ -62,7 +62,7 @@ public class InstrumentPlusPlus {
         assert world != null;
         RecipeManagerAccess recipeManagerAccess = (RecipeManagerAccess)(world.getRecipeManager());
         Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipes = Maps.newHashMap(recipeManagerAccess.ipp_getRecipes());
-        recipes.compute(IPPRecipes.MUSICAL_INSTRUMENT_SHADOW_TYPE, (key, map) -> {
+        recipes.compute(IPPRecipes.MUSICAL_INSTRUMENT_SHADOW_TYPE.get(), (key, map) -> {
             Map<ResourceLocation, Recipe<?>> shadows = Maps.newHashMap();
             if(map != null) {
                 shadows.putAll(map);

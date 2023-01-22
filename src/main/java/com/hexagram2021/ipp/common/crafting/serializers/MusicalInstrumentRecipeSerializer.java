@@ -9,13 +9,12 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
-public class MusicalInstrumentRecipeSerializer<T extends MusicalInstrumentShadowRecipe> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<T> {
+public class MusicalInstrumentRecipeSerializer<T extends MusicalInstrumentShadowRecipe> implements RecipeSerializer<T> {
 	private final MusicalInstrumentRecipeSerializer.Creator<T> factory;
 
 	public MusicalInstrumentRecipeSerializer(MusicalInstrumentRecipeSerializer.Creator<T> creator) {
