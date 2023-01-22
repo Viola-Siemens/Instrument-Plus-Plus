@@ -1,0 +1,98 @@
+{
+  "block.note_block.bassoon": {
+    "sounds": [
+      "ipp:note/bassoon"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.clarinet": {
+    "sounds": [
+      "ipp:note/clarinet"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.cymbal": {
+    "sounds": [
+      "ipp:note/cymbal"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.electric_clean": {
+    "sounds": [
+      "ipp:note/electric_clean"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.electric_overdriven": {
+    "sounds": [
+      "ipp:note/electric_overdriven"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.erhu": {
+    "sounds": [
+      "ipp:note/erhu"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.french_horn": {
+    "sounds": [
+      "ipp:note/french_horn"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.guqin": {
+    "sounds": [
+      "ipp:note/guqin"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.konghou": {
+    "sounds": [
+      "ipp:note/konghou"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.suona": {
+    "sounds": [
+      "ipp:note/suona"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.timpani": {
+    "sounds": [
+      "ipp:note/timpani"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.trumpet": {
+    "sounds": [
+      "ipp:note/trumpet"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.tuba": {
+    "sounds": [
+      "ipp:note/tuba"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.viola": {
+    "sounds": [
+      "ipp:note/viola"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.violin": {
+    "sounds": [
+      "ipp:note/violin"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.yangqin": {
+    "sounds": [
+      "ipp:note/yangqin"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  }
+}

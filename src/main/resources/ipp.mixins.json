@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.hexagram2021.ipp.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "ipp.refmap.json",
+  "mixins": [
+    "NoteBlockInstrumentMixin",
+    "RecipeManagerAccess"
+  ],
+  "minVersion": "0.8",
+  "client": [
+  ]
+}
