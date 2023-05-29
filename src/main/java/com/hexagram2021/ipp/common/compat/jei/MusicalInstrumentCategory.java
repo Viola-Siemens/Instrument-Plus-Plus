@@ -14,7 +14,6 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,62 +21,50 @@ import net.minecraft.world.item.Items;
 import static com.hexagram2021.ipp.InstrumentPlusPlus.MODID;
 
 public class MusicalInstrumentCategory implements IRecipeCategory<MusicalInstrumentShadowRecipe> {
-	public static final int width = 96;
-	public static final int height = 32;
-	public static final ResourceLocation UID = new ResourceLocation(MODID, "musical_instrument");
-	public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "textures/gui/musical_instrument.png");
+    public static final int width = 96;
+    public static final int height = 32;
+    public static final ResourceLocation UID = new ResourceLocation(MODID, "musical_instrument");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(MODID, "textures/gui/musical_instrument.png");
 
-	private final IDrawable background;
-	private final IDrawable icon;
+    private final IDrawable background;
+    private final IDrawable icon;
 
-	public MusicalInstrumentCategory(IGuiHelper guiHelper) {
-		this.background = guiHelper.createDrawable(TEXTURE, 0, 0, width, height);
-		this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Items.NOTE_BLOCK));
-	}
+    public MusicalInstrumentCategory(IGuiHelper guiHelper) {
+        this.background = guiHelper.createDrawable(TEXTURE, 0, 0, width, height);
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Items.NOTE_BLOCK));
+    }
 
-	@Override
-	public Component getTitle() {
-		return new TranslatableComponent("jei.ipp.musical_instrument");
-	}
+    @Override
+    public Component getTitle() {
+        return Component.translatable("jei.ipp.musical_instrument");
+    }
 
-	@Override
-	public IDrawable getBackground() {
-		return this.background;
-	}
+    @Override
+    public IDrawable getBackground() {
+        return this.background;
+    }
 
-	@Override
-	public IDrawable getIcon() {
-		return this.icon;
-	}
+    @Override
+    public IDrawable getIcon() {
+        return this.icon;
+    }
 
-	@SuppressWarnings("removal")
-	@Override
-	public ResourceLocation getUid() {
-		return UID;
-	}
+    @Override
+    public RecipeType<MusicalInstrumentShadowRecipe> getRecipeType() {
+        return JeiHelper.INSTRUMENTS;
+    }
 
-	@SuppressWarnings("removal")
-	@Override
-	public Class<? extends MusicalInstrumentShadowRecipe> getRecipeClass() {
-		return MusicalInstrumentShadowRecipe.class;
-	}
+    @Override
+    public void draw(MusicalInstrumentShadowRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+        Component tip = Component.translatable("gui.ipp.jei.instrument.tip", Component.translatable("gui.ipp.jei.instrument.%s".formatted(recipe.instrument().getSerializedName())));
+        Minecraft minecraft = Minecraft.getInstance();
+        Font fontRenderer = minecraft.font;
+        int stringWidth = fontRenderer.width(tip);
+        fontRenderer.draw(stack, tip, this.background.getWidth() - stringWidth, 12, 0xFF808080);
+    }
 
-	@Override
-	public RecipeType<MusicalInstrumentShadowRecipe> getRecipeType() {
-		return JeiHelper.INSTRUMENTS;
-	}
-
-	@Override
-	public void draw(MusicalInstrumentShadowRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-		Component tip = new TranslatableComponent("gui.ipp.jei.instrument.tip", new TranslatableComponent("gui.ipp.jei.instrument.%s".formatted(recipe.instrument().getSerializedName())));
-		Minecraft minecraft = Minecraft.getInstance();
-		Font fontRenderer = minecraft.font;
-		int stringWidth = fontRenderer.width(tip);
-		fontRenderer.draw(stack, tip, this.background.getWidth() - stringWidth, 12, 0xFF808080);
-	}
-
-	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, MusicalInstrumentShadowRecipe recipe, IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 3, 8).addIngredients(recipe.bottom());
-	}
+    @Override
+    public void setRecipe(IRecipeLayoutBuilder builder, MusicalInstrumentShadowRecipe recipe, IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 3, 8).addIngredients(recipe.bottom());
+    }
 }
