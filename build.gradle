@@ -20,7 +20,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '2.0.0'
+version = '2.3.0'
 group = 'com.hexagram2021.ipp'
 archivesBaseName = 'ipp'
 
@@ -28,9 +28,9 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'official', version: '1.19'
+    mappings channel: 'official', version: '1.19.3'
 
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
     runs {
         client {
@@ -117,10 +117,10 @@ repositories {
     maven { // TOP
         url "https://cursemaven.com"
     }
-    maven { // JEI
-        name 'DVS1 Maven FS'
-        url 'https://dvs1.progwml6.com/files/maven'
-    }
+//    maven { // JEI
+//        name 'DVS1 Maven FS'
+//        url 'https://dvs1.progwml6.com/files/maven'
+//    }
     maven { //mirror
         name = "ModMaven"
         url = "https://modmaven.dev"
@@ -128,9 +128,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19-41.1.0'
+    minecraft 'net.minecraftforge:forge:1.19.3-44.1.0'
     
-    compileOnly fg.deobf("mezz.jei:jei-1.19-forge:11.1.1.239")	// Adds JEI API as a compile dependency
+    compileOnly fg.deobf("mezz.jei:jei-1.19.3-forge:12.3.0.18")	// Adds JEI API as a compile dependency
     
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }

@@ -7,7 +7,7 @@ import com.hexagram2021.ipp.common.crafting.MusicalInstrumentShadowRecipe;
 import com.hexagram2021.ipp.common.register.IPPRecipes;
 import com.hexagram2021.ipp.mixin.RecipeManagerAccess;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -56,7 +56,6 @@ public class InstrumentPlusPlus {
         event.enqueueWork(IPPContent::init);
     }
 
-    @SuppressWarnings("deprecation")
     public void serverStarted(ServerStartedEvent event) {
         ServerLevel world = event.getServer().getLevel(Level.OVERWORLD);
         assert world != null;
@@ -70,10 +69,10 @@ public class InstrumentPlusPlus {
 
             Map<NoteBlockInstrument, List<ItemStack>> bottoms = Maps.newHashMap();
 
-            Registry.BLOCK.forEach(block -> {
+            world.registryAccess().registryOrThrow(Registries.BLOCK).forEach(block -> {
                 ItemStack itemStack = new ItemStack(block.asItem());
                 if(!itemStack.isEmpty()) {
-                    NoteBlockInstrument instrument = NoteBlockInstrument.byState(block.defaultBlockState());
+                    NoteBlockInstrument instrument = NoteBlockInstrument.byStateBelow(block.defaultBlockState());
                     bottoms.computeIfAbsent(instrument, ignored -> Lists.newArrayList()).add(itemStack);
                 }
             });

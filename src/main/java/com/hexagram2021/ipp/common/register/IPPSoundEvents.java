@@ -1,6 +1,6 @@
 package com.hexagram2021.ipp.common.register;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.registries.RegisterEvent;
@@ -32,12 +32,12 @@ public class IPPSoundEvents {
 
 	private static SoundEvent registerSound(String name) {
 		ResourceLocation location = new ResourceLocation(MODID, name);
-		SoundEvent event = new SoundEvent(location);
+		SoundEvent event = SoundEvent.createVariableRangeEvent(location);
 		registeredEvents.put(location, event);
 		return event;
 	}
 
 	public static void init(RegisterEvent event) {
-		event.register(Registry.SOUND_EVENT_REGISTRY, helper -> registeredEvents.forEach(helper::register));
+		event.register(Registries.SOUND_EVENT, helper -> registeredEvents.forEach(helper::register));
 	}
 }

@@ -2,6 +2,7 @@ package com.hexagram2021.ipp.mixin;
 
 import com.hexagram2021.ipp.common.register.IPPBlockTags;
 import com.hexagram2021.ipp.common.register.IPPSoundEvents;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
@@ -17,43 +18,66 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import static com.hexagram2021.ipp.common.register.IPPInstruments.*;
 
 @Mixin(NoteBlockInstrument.class)
 public class NoteBlockInstrumentMixin {
 	@SuppressWarnings("unused")
-	NoteBlockInstrumentMixin(String enumName, int ord, String name, SoundEvent sound) {
+	NoteBlockInstrumentMixin(String enumName, int ord, String name, Holder<SoundEvent> sound, NoteBlockInstrument.Type type) {
 		throw new UnsupportedOperationException("Replaced by Mixin");
 	}
 
 	@Shadow @Mutable @Final
 	private static NoteBlockInstrument[] $VALUES;
 
+	private static NoteBlockInstrument create(String enumName, int ord, SoundEvent soundEvent) {
+		return (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin(
+				enumName, ord, enumName.toLowerCase(Locale.ROOT), Holder.direct(soundEvent), NoteBlockInstrument.Type.BASE_BLOCK
+		);
+	}
+
 	@Inject(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;$VALUES:[Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;", shift = At.Shift.AFTER))
 	private static void ipp_injectEnum(CallbackInfo ci) {
 		int ordinal = $VALUES.length;
 		$VALUES = Arrays.copyOf($VALUES, ordinal + 16);
 
-		BASSOON = $VALUES[ordinal] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("BASSOON", ordinal, "bassoon", IPPSoundEvents.NOTE_BLOCK_BASSOON);
-		CLARINET = $VALUES[ordinal + 1] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("CLARINET", ordinal + 1, "clarinet", IPPSoundEvents.NOTE_BLOCK_CLARINET);
-		CYMBAL = $VALUES[ordinal + 2] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("CYMBAL", ordinal + 2, "cymbal", IPPSoundEvents.NOTE_BLOCK_CYMBAL);
-		ELECTRIC_CLEAN = $VALUES[ordinal + 3] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("ELECTRIC_CLEAN", ordinal + 3, "electric_clean", IPPSoundEvents.NOTE_BLOCK_ELECTRIC_CLEAN);
-		ELECTRIC_OVERDRIVEN = $VALUES[ordinal + 4] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("ELECTRIC_OVERDRIVEN", ordinal + 4, "electric_overdriven", IPPSoundEvents.NOTE_BLOCK_ELECTRIC_OVERDRIVEN);
-		ERHU = $VALUES[ordinal + 5] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("ERHU", ordinal + 5, "erhu", IPPSoundEvents.NOTE_BLOCK_ERHU);
-		FRENCH_HORN = $VALUES[ordinal + 6] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("FRENCH_HORN", ordinal + 6, "french_horn", IPPSoundEvents.NOTE_BLOCK_FRENCH_HORN);
-		GUQIN = $VALUES[ordinal + 7] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("GUQIN", ordinal + 7, "guqin", IPPSoundEvents.NOTE_BLOCK_GUQIN);
-		KONGHOU = $VALUES[ordinal + 8] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("KONGHOU", ordinal + 8, "konghou", IPPSoundEvents.NOTE_BLOCK_KONGHOU);
-		SUONA = $VALUES[ordinal + 9] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("SUONA", ordinal + 9, "suona", IPPSoundEvents.NOTE_BLOCK_SUONA);
-		TIMPANI = $VALUES[ordinal + 10] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("TIMPANI", ordinal + 10, "timpani", IPPSoundEvents.NOTE_BLOCK_TIMPANI);
-		TRUMPET = $VALUES[ordinal + 11] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("TRUMPET", ordinal + 11, "trumpet", IPPSoundEvents.NOTE_BLOCK_TRUMPET);
-		TUBA = $VALUES[ordinal + 12] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("TUBA", ordinal + 12, "tuba", IPPSoundEvents.NOTE_BLOCK_TUBA);
-		VIOLA = $VALUES[ordinal + 13] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("VIOLA", ordinal + 13, "viola", IPPSoundEvents.NOTE_BLOCK_VIOLA);
-		VIOLIN = $VALUES[ordinal + 14] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("VIOLIN", ordinal + 14, "violin", IPPSoundEvents.NOTE_BLOCK_VIOLIN);
-		YANGQIN = $VALUES[ordinal + 15] = (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin("YANGQIN", ordinal + 15, "yangqin", IPPSoundEvents.NOTE_BLOCK_YANGQIN);
+		BASSOON = $VALUES[ordinal] =
+				create("BASSOON", ordinal, IPPSoundEvents.NOTE_BLOCK_BASSOON);
+		CLARINET = $VALUES[ordinal + 1] =
+				create("CLARINET", ordinal + 1, IPPSoundEvents.NOTE_BLOCK_CLARINET);
+		CYMBAL = $VALUES[ordinal + 2] =
+				create("CYMBAL", ordinal + 2, IPPSoundEvents.NOTE_BLOCK_CYMBAL);
+		ELECTRIC_CLEAN = $VALUES[ordinal + 3] =
+				create("ELECTRIC_CLEAN", ordinal + 3, IPPSoundEvents.NOTE_BLOCK_ELECTRIC_CLEAN);
+		ELECTRIC_OVERDRIVEN = $VALUES[ordinal + 4] =
+				create("ELECTRIC_OVERDRIVEN", ordinal + 4, IPPSoundEvents.NOTE_BLOCK_ELECTRIC_OVERDRIVEN);
+		ERHU = $VALUES[ordinal + 5] =
+				create("ERHU", ordinal + 5, IPPSoundEvents.NOTE_BLOCK_ERHU);
+		FRENCH_HORN = $VALUES[ordinal + 6] =
+				create("FRENCH_HORN", ordinal + 6, IPPSoundEvents.NOTE_BLOCK_FRENCH_HORN);
+		GUQIN = $VALUES[ordinal + 7] =
+				create("GUQIN", ordinal + 7, IPPSoundEvents.NOTE_BLOCK_GUQIN);
+		KONGHOU = $VALUES[ordinal + 8] =
+				create("KONGHOU", ordinal + 8, IPPSoundEvents.NOTE_BLOCK_KONGHOU);
+		SUONA = $VALUES[ordinal + 9] =
+				create("SUONA", ordinal + 9, IPPSoundEvents.NOTE_BLOCK_SUONA);
+		TIMPANI = $VALUES[ordinal + 10] =
+				create("TIMPANI", ordinal + 10, IPPSoundEvents.NOTE_BLOCK_TIMPANI);
+		TRUMPET = $VALUES[ordinal + 11] =
+				create("TRUMPET", ordinal + 11, IPPSoundEvents.NOTE_BLOCK_TRUMPET);
+		TUBA = $VALUES[ordinal + 12] =
+				create("TUBA", ordinal + 12, IPPSoundEvents.NOTE_BLOCK_TUBA);
+		VIOLA = $VALUES[ordinal + 13] =
+				create("VIOLA", ordinal + 13, IPPSoundEvents.NOTE_BLOCK_VIOLA);
+		VIOLIN = $VALUES[ordinal + 14] =
+				create("VIOLIN", ordinal + 14, IPPSoundEvents.NOTE_BLOCK_VIOLIN);
+		YANGQIN = $VALUES[ordinal + 15] =
+				create("YANGQIN", ordinal + 15, IPPSoundEvents.NOTE_BLOCK_YANGQIN);
 	}
 
-	@Inject(method = "byState", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "byStateBelow", at = @At(value = "HEAD"), cancellable = true)
 	private static void addIPPInstruments(BlockState blockState, CallbackInfoReturnable<NoteBlockInstrument> cir) {
 		if(blockState.is(Blocks.BASALT) ||
 				blockState.is(Blocks.POLISHED_BASALT) ||
