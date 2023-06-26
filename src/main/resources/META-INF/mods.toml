@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[41,)"
+loaderVersion="[45,)"
 license="MIT"
 issueTrackerURL="https://github.com/Viola-Siemens/Instrument-Plus-Plus/issues"
 
@@ -18,13 +18,13 @@ More Musical Instruments for Note Blocks!
 [[dependencies.ipp]]
     modId="forge"
     mandatory=true
-    versionRange="[41,)"
+    versionRange="[45,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.ipp]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19,1.20)"
+    versionRange="[1.19.4,1.20)"
     ordering="NONE"
     side="BOTH"

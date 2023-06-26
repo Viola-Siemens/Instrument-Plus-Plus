@@ -1,22 +1,23 @@
 package com.hexagram2021.ipp.common.compat.jei;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.hexagram2021.ipp.InstrumentPlusPlus;
 import com.hexagram2021.ipp.common.crafting.MusicalInstrumentShadowRecipe;
-import com.hexagram2021.ipp.common.crafting.cache.CachedRecipeList;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.hexagram2021.ipp.InstrumentPlusPlus.MODID;
 
@@ -52,12 +53,29 @@ public class JeiHelper implements IModPlugin {
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		InstrumentPlusPlus.LOGGER.info("Adding EC recipes to JEI!!");
-		registration.addRecipes(JeiHelper.INSTRUMENTS, getRecipes(MusicalInstrumentShadowRecipe.recipeList));
+		registration.addRecipes(JeiHelper.INSTRUMENTS, getRecipes());
 	}
 
-	@SuppressWarnings("SameParameterValue")
-	private <T extends Recipe<?>> List<T> getRecipes(CachedRecipeList<T> cachedList) {
-		return new ArrayList<>(cachedList.getRecipes(Minecraft.getInstance().level));
+	private List<MusicalInstrumentShadowRecipe> getRecipes() {
+		List<MusicalInstrumentShadowRecipe> shadows = Lists.newArrayList();
+
+		Map<NoteBlockInstrument, List<ItemStack>> bottoms = Maps.newHashMap();
+
+		ForgeRegistries.BLOCKS.forEach(block -> {
+			ItemStack itemStack = new ItemStack(block.asItem());
+			if(!itemStack.isEmpty()) {
+				NoteBlockInstrument instrument = NoteBlockInstrument.byStateBelow(block.defaultBlockState());
+				bottoms.computeIfAbsent(instrument, ignored -> Lists.newArrayList()).add(itemStack);
+			}
+		});
+
+		bottoms.forEach((instrument, blocks) -> {
+			Ingredient bottom = Ingredient.of(blocks.stream());
+			ResourceLocation id = new ResourceLocation(MODID, "instrument/" + instrument.getSerializedName());
+			shadows.add(new MusicalInstrumentShadowRecipe(id, bottom, instrument));
+		});
+
+		return shadows;
 	}
 
 	@Override

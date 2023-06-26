@@ -14,7 +14,7 @@ public class IPPRecipeSerializers {
 	public static final DeferredRegister<RecipeSerializer<?>> REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MODID);
 
 	public static final RegistryObject<MusicalInstrumentRecipeSerializer<MusicalInstrumentShadowRecipe>> MUSICAL_INSTRUMENT_SHADOW_SERIALIZER = REGISTER.register(
-			"trade_shadow", () -> new MusicalInstrumentRecipeSerializer<>(MusicalInstrumentShadowRecipe::new)
+			"instrument_shadow", () -> new MusicalInstrumentRecipeSerializer<>(MusicalInstrumentShadowRecipe::new)
 	);
 
 	public static void init(IEventBus bus) {

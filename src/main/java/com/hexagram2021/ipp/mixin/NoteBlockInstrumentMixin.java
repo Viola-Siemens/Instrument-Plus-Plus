@@ -119,10 +119,7 @@ public class NoteBlockInstrumentMixin {
 		} else if(blockState.is(Blocks.DIRT)) {
 			cir.setReturnValue(SUONA);
 			cir.cancel();
-		} else if(blockState.is(Blocks.NETHER_BRICKS) ||
-				blockState.is(Blocks.CHISELED_NETHER_BRICKS) ||
-				blockState.is(Blocks.CRACKED_NETHER_BRICKS) ||
-				blockState.is(Blocks.RED_NETHER_BRICKS)) {
+		} else if(blockState.is(IPPBlockTags.NETHER_BRICKS)) {
 			cir.setReturnValue(TIMPANI);
 			cir.cancel();
 		} else if(blockState.is(IPPBlockTags.CUT_COPPER_BLOCKS)) {

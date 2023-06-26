@@ -1,9 +1,9 @@
 package com.hexagram2021.ipp.common.crafting;
 
-import com.hexagram2021.ipp.common.crafting.cache.CachedRecipeList;
 import com.hexagram2021.ipp.common.register.IPPRecipeSerializers;
 import com.hexagram2021.ipp.common.register.IPPRecipes;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -18,11 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public record MusicalInstrumentShadowRecipe(ResourceLocation id, Ingredient bottom, NoteBlockInstrument instrument) implements Recipe<Container> {
-	public static final CachedRecipeList<MusicalInstrumentShadowRecipe> recipeList = new CachedRecipeList<>(
-			IPPRecipes.MUSICAL_INSTRUMENT_SHADOW_TYPE,
-			MusicalInstrumentShadowRecipe.class
-	);
-
 	@Override
 	public boolean canCraftInDimensions(int wid, int hgt) {
 		return true;
@@ -40,13 +35,13 @@ public record MusicalInstrumentShadowRecipe(ResourceLocation id, Ingredient bott
 
 	@SuppressWarnings("NullableProblems")
 	@Override @Nullable
-	public ItemStack assemble(@NotNull Container container) {
+	public ItemStack assemble(@NotNull Container container, @NotNull RegistryAccess registryAccess) {
 		return null;
 	}
 
 	@SuppressWarnings("NullableProblems")
 	@Override @Nullable
-	public ItemStack getResultItem() {
+	public ItemStack getResultItem(@NotNull RegistryAccess registryAccess) {
 		return null;
 	}
 

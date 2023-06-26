@@ -12,6 +12,7 @@ public class IPPBlockTags {
 	public static final TagKey<Block> CUT_COPPER_BLOCKS = create("cut_copper_blocks");
 	public static final TagKey<Block> DEAD_CORAL_BLOCKS = create("dead_coral_blocks");
 	public static final TagKey<Block> GLAZED_TERRACOTTA = create("glazed_terracotta");
+	public static final TagKey<Block> NETHER_BRICKS = create("nether_bricks");
 
 	private static TagKey<Block> create(String name) {
 		return TagKey.create(Registries.BLOCK, new ResourceLocation(MODID, name));

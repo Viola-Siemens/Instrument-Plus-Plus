@@ -1,0 +1,12 @@
+{
+  "values": [
+    "minecraft:nether_bricks",
+    "minecraft:chiseled_nether_bricks",
+    "minecraft:cracked_nether_bricks",
+    "minecraft:red_nether_bricks",
+    {
+      "id": "emeraldcraft:blue_nether_bricks",
+      "required": false
+    }
+  ]
+}

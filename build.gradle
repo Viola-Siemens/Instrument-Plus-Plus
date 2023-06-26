@@ -20,7 +20,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '2.3.0'
+version = '2.4.0'
 group = 'com.hexagram2021.ipp'
 archivesBaseName = 'ipp'
 
@@ -28,7 +28,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'official', version: '1.19.3'
+    mappings channel: 'official', version: '1.19.4'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
@@ -128,9 +128,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.3-44.1.0'
+    minecraft 'net.minecraftforge:forge:1.19.4-45.1.0'
     
-    compileOnly fg.deobf("mezz.jei:jei-1.19.3-forge:12.3.0.18")	// Adds JEI API as a compile dependency
+    compileOnly fg.deobf("mezz.jei:jei-1.19.4-forge:13.1.0.15")	// Adds JEI API as a compile dependency
     
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
