@@ -1,7 +1,6 @@
 package com.hexagram2021.ipp.common.compat.jei;
 
 import com.hexagram2021.ipp.common.crafting.MusicalInstrumentShadowRecipe;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -12,7 +11,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -55,12 +54,11 @@ public class MusicalInstrumentCategory implements IRecipeCategory<MusicalInstrum
 	}
 
 	@Override
-	public void draw(MusicalInstrumentShadowRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+	public void draw(MusicalInstrumentShadowRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics transform, double mouseX, double mouseY) {
 		Component tip = Component.translatable("gui.ipp.jei.instrument.tip", Component.translatable("gui.ipp.jei.instrument.%s".formatted(recipe.instrument().getSerializedName())));
 		Minecraft minecraft = Minecraft.getInstance();
-		Font fontRenderer = minecraft.font;
-		int stringWidth = fontRenderer.width(tip);
-		fontRenderer.draw(stack, tip, this.background.getWidth() - stringWidth, 12, 0xFF808080);
+		int stringWidth = minecraft.font.width(tip);
+		transform.drawString(minecraft.font, tip, this.background.getWidth() - stringWidth, 12, 0xFF808080);
 	}
 
 	@Override

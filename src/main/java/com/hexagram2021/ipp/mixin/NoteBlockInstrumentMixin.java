@@ -1,12 +1,8 @@
 package com.hexagram2021.ipp.mixin;
 
-import com.hexagram2021.ipp.common.register.IPPBlockTags;
 import com.hexagram2021.ipp.common.register.IPPSoundEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,7 +11,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -75,68 +70,5 @@ public class NoteBlockInstrumentMixin {
 				create("VIOLIN", ordinal + 14, IPPSoundEvents.NOTE_BLOCK_VIOLIN);
 		YANGQIN = $VALUES[ordinal + 15] =
 				create("YANGQIN", ordinal + 15, IPPSoundEvents.NOTE_BLOCK_YANGQIN);
-	}
-
-	@Inject(method = "byStateBelow", at = @At(value = "HEAD"), cancellable = true)
-	private static void addIPPInstruments(BlockState blockState, CallbackInfoReturnable<NoteBlockInstrument> cir) {
-		if(blockState.is(Blocks.BASALT) ||
-				blockState.is(Blocks.POLISHED_BASALT) ||
-				blockState.is(Blocks.SMOOTH_BASALT)) {
-			cir.setReturnValue(BASSOON);
-			cir.cancel();
-		} else if(blockState.is(Blocks.BLACKSTONE) ||
-				blockState.is(Blocks.CHISELED_POLISHED_BLACKSTONE) ||
-				blockState.is(Blocks.GILDED_BLACKSTONE) ||
-				blockState.is(Blocks.POLISHED_BLACKSTONE) ||
-				blockState.is(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS) ||
-				blockState.is(Blocks.POLISHED_BLACKSTONE_BRICKS)) {
-			cir.setReturnValue(CLARINET);
-			cir.cancel();
-		} else if(blockState.is(Blocks.CHAIN) ||
-				blockState.is(Blocks.IRON_BARS)) {
-			cir.setReturnValue(CYMBAL);
-			cir.cancel();
-		} else if(blockState.is(Blocks.SNOW) ||
-				blockState.is(Blocks.SNOW_BLOCK) ||
-				blockState.is(Blocks.POWDER_SNOW)) {
-			cir.setReturnValue(ELECTRIC_CLEAN);
-			cir.cancel();
-		} else if(blockState.is(Blocks.NETHERRACK)) {
-			cir.setReturnValue(ELECTRIC_OVERDRIVEN);
-			cir.cancel();
-		} else if(blockState.is(BlockTags.CORAL_BLOCKS) || blockState.is(IPPBlockTags.DEAD_CORAL_BLOCKS)) {
-			cir.setReturnValue(ERHU);
-			cir.cancel();
-		} else if(blockState.is(IPPBlockTags.COPPER_BLOCKS)) {
-			cir.setReturnValue(FRENCH_HORN);
-			cir.cancel();
-		} else if(blockState.is(Blocks.MOSS_BLOCK)) {
-			cir.setReturnValue(GUQIN);
-			cir.cancel();
-		} else if(blockState.is(Blocks.END_STONE) || blockState.is(Blocks.END_STONE_BRICKS)) {
-			cir.setReturnValue(KONGHOU);
-			cir.cancel();
-		} else if(blockState.is(Blocks.DIRT)) {
-			cir.setReturnValue(SUONA);
-			cir.cancel();
-		} else if(blockState.is(IPPBlockTags.NETHER_BRICKS)) {
-			cir.setReturnValue(TIMPANI);
-			cir.cancel();
-		} else if(blockState.is(IPPBlockTags.CUT_COPPER_BLOCKS)) {
-			cir.setReturnValue(TRUMPET);
-			cir.cancel();
-		} else if(blockState.is(Blocks.GRAVEL)) {
-			cir.setReturnValue(TUBA);
-			cir.cancel();
-		} else if(blockState.is(IPPBlockTags.GLAZED_TERRACOTTA)) {
-			cir.setReturnValue(VIOLA);
-			cir.cancel();
-		} else if(blockState.is(BlockTags.TERRACOTTA)) {
-			cir.setReturnValue(VIOLIN);
-			cir.cancel();
-		} else if(blockState.is(Blocks.AMETHYST_BLOCK) || blockState.is(Blocks.BUDDING_AMETHYST)) {
-			cir.setReturnValue(YANGQIN);
-			cir.cancel();
-		}
 	}
 }

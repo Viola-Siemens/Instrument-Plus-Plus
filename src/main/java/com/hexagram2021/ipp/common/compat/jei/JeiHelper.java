@@ -64,7 +64,7 @@ public class JeiHelper implements IModPlugin {
 		ForgeRegistries.BLOCKS.forEach(block -> {
 			ItemStack itemStack = new ItemStack(block.asItem());
 			if(!itemStack.isEmpty()) {
-				NoteBlockInstrument instrument = NoteBlockInstrument.byStateBelow(block.defaultBlockState());
+				NoteBlockInstrument instrument = block.defaultBlockState().instrument();
 				bottoms.computeIfAbsent(instrument, ignored -> Lists.newArrayList()).add(itemStack);
 			}
 		});

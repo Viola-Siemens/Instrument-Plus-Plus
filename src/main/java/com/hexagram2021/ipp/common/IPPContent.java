@@ -1,5 +1,6 @@
 package com.hexagram2021.ipp.common;
 
+import com.hexagram2021.ipp.common.register.IPPBlockTags;
 import com.hexagram2021.ipp.common.register.IPPRecipeSerializers;
 import com.hexagram2021.ipp.common.register.IPPRecipes;
 import com.hexagram2021.ipp.common.register.IPPSoundEvents;
@@ -17,9 +18,7 @@ public class IPPContent {
 	public static void modConstruction(IEventBus bus, Consumer<Runnable> runLater) {
 		IPPRecipes.init(bus);
 		IPPRecipeSerializers.init(bus);
-	}
-
-	public static void init() {
+		IPPBlockTags.init();
 	}
 
 	@SubscribeEvent
