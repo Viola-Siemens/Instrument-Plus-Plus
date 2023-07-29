@@ -11,6 +11,12 @@
     ],
     "subtitle": "subtitles.block.note_block.note"
   },
+  "block.note_block.crash": {
+    "sounds": [
+      "ipp:note/crash"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
   "block.note_block.cymbal": {
     "sounds": [
       "ipp:note/cymbal"
@@ -26,6 +32,12 @@
   "block.note_block.electric_overdriven": {
     "sounds": [
       "ipp:note/electric_overdriven"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.electric_piano": {
+    "sounds": [
+      "ipp:note/electric_piano"
     ],
     "subtitle": "subtitles.block.note_block.note"
   },
@@ -53,6 +65,12 @@
     ],
     "subtitle": "subtitles.block.note_block.note"
   },
+  "block.note_block.pad": {
+    "sounds": [
+      "ipp:note/pad"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
   "block.note_block.suona": {
     "sounds": [
       "ipp:note/suona"
@@ -62,6 +80,12 @@
   "block.note_block.timpani": {
     "sounds": [
       "ipp:note/timpani"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.trombone": {
+    "sounds": [
+      "ipp:note/trombone"
     ],
     "subtitle": "subtitles.block.note_block.note"
   },

@@ -53,12 +53,16 @@ public class InstrumentPlusPlus {
                 setInstrument(block, BASSOON);
             } else if(block.builtInRegistryHolder().is(IPPBlockTags.BLACKSTONES)) {
                 setInstrument(block, CLARINET);
+            } else if(block.equals(Blocks.IRON_TRAPDOOR)) {
+                setInstrument(block, CRASH);
             } else if(block.equals(Blocks.CHAIN) || block.equals(Blocks.IRON_BARS)) {
                 setInstrument(block, CYMBAL);
             } else if(block.builtInRegistryHolder().is(IPPBlockTags.SNOWS)) {
                 setInstrument(block, ELECTRIC_CLEAN);
             } else if(block.equals(Blocks.NETHERRACK)) {
                 setInstrument(block, ELECTRIC_OVERDRIVEN);
+            } else if(block.builtInRegistryHolder().is(IPPBlockTags.QUARTZ_BLOCKS)) {
+                setInstrument(block, ELECTRIC_PIANO);
             } else if(block.builtInRegistryHolder().is(BlockTags.CORAL_BLOCKS) ||
                     block.builtInRegistryHolder().is(IPPBlockTags.DEAD_CORAL_BLOCKS)) {
                 setInstrument(block, ERHU);
@@ -68,10 +72,14 @@ public class InstrumentPlusPlus {
                 setInstrument(block, GUQIN);
             } else if(block.builtInRegistryHolder().is(IPPBlockTags.END_STONES)) {
                 setInstrument(block, KONGHOU);
+            } else if(block.equals(Blocks.LAPIS_BLOCK)) {
+                setInstrument(block, PAD);
             } else if(block.equals(Blocks.DIRT)) {
                 setInstrument(block, SUONA);
             } else if(block.builtInRegistryHolder().is(IPPBlockTags.NETHER_BRICKS)) {
                 setInstrument(block, TIMPANI);
+            } else if(block.equals(Blocks.DRIED_KELP_BLOCK)) {
+                setInstrument(block, TROMBONE);
             } else if(block.builtInRegistryHolder().is(IPPBlockTags.CUT_COPPER_BLOCKS)) {
                 setInstrument(block, TRUMPET);
             } else if(block.equals(Blocks.GRAVEL)) {
