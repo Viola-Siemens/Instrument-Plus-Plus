@@ -62,6 +62,14 @@
   "jade.instrument.violin": "バイオリン",
   "jade.instrument.yangqin": "揚琴",
 
+  "gui.ipp.jei.mob.zombie": "ゾンビ",
+  "gui.ipp.jei.mob.skeleton": "スケルトン",
+  "gui.ipp.jei.mob.creeper": "クリーパー",
+  "gui.ipp.jei.mob.dragon": "エンダードラゴン",
+  "gui.ipp.jei.mob.wither_skeleton": "ウィザースケルトン",
+  "gui.ipp.jei.mob.piglin": "ピグリン",
+  "gui.ipp.jei.mob.custom_head": "プレイヤー",
+
   "gui.ipp.jei.instrument.tip": "音色：%s",
 
   "jei.ipp.musical_instrument": "音符ブロックの楽器"

@@ -41,6 +41,14 @@
   "gui.ipp.jei.instrument.violin": "Violin",
   "gui.ipp.jei.instrument.yangqin": "Yangqin",
 
+  "gui.ipp.jei.mob.zombie": "Zombie",
+  "gui.ipp.jei.mob.skeleton": "Skeleton",
+  "gui.ipp.jei.mob.creeper": "Creeper",
+  "gui.ipp.jei.mob.dragon": "Ender Dragon",
+  "gui.ipp.jei.mob.wither_skeleton": "Wither Skeleton",
+  "gui.ipp.jei.mob.piglin": "Piglin",
+  "gui.ipp.jei.mob.custom_head": "Player",
+
   "jade.instrument.bassoon": "Bassoon",
   "jade.instrument.clarinet": "Clarinet",
   "jade.instrument.crash": "Crash",

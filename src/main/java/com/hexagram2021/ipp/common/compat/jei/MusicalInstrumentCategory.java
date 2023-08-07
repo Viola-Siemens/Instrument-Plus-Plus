@@ -55,7 +55,13 @@ public class MusicalInstrumentCategory implements IRecipeCategory<MusicalInstrum
 
 	@Override
 	public void draw(MusicalInstrumentShadowRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics transform, double mouseX, double mouseY) {
-		Component tip = Component.translatable("gui.ipp.jei.instrument.tip", Component.translatable("gui.ipp.jei.instrument.%s".formatted(recipe.instrument().getSerializedName())));
+		Component timbre;
+		if(recipe.instrument().isTunable()) {
+			timbre = Component.translatable("gui.ipp.jei.instrument.%s".formatted(recipe.instrument().getSerializedName()));
+		} else {
+			timbre = Component.translatable("gui.ipp.jei.mob.%s".formatted(recipe.instrument().getSerializedName()));
+		}
+		Component tip = Component.translatable("gui.ipp.jei.instrument.tip", timbre);
 		Minecraft minecraft = Minecraft.getInstance();
 		int stringWidth = minecraft.font.width(tip);
 		transform.drawString(minecraft.font, tip, this.background.getWidth() - stringWidth, 12, 0xFF808080);

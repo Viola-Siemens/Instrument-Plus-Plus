@@ -41,6 +41,14 @@
   "gui.ipp.jei.instrument.violin": "小提琴",
   "gui.ipp.jei.instrument.yangqin": "揚琴",
 
+  "gui.ipp.jei.mob.zombie": "殭屍",
+  "gui.ipp.jei.mob.skeleton": "骷髏",
+  "gui.ipp.jei.mob.creeper": "苦力怕",
+  "gui.ipp.jei.mob.dragon": "終界龍",
+  "gui.ipp.jei.mob.wither_skeleton": "凋零骷髏",
+  "gui.ipp.jei.mob.piglin": "豬布林",
+  "gui.ipp.jei.mob.custom_head": "玩家",
+
   "jade.instrument.bassoon": "巴松管",
   "jade.instrument.clarinet": "單簧管",
   "jade.instrument.crash": "吊鑔",
